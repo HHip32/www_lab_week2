@@ -1,6 +1,7 @@
 package vn.edu.iuh.fit.models;
 
 import jakarta.persistence.*;
+import vn.edu.iuh.fit.enums.EmployeeStatus;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
