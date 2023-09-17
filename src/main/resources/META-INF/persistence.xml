@@ -5,6 +5,12 @@
              version="3.0">
   <persistence-unit name="my-persistence">
     <class>vn.edu.iuh.fit.models.Employee</class>
+    <class>vn.edu.iuh.fit.models.Order</class>
+    <class>vn.edu.iuh.fit.models.Customer</class>
+    <class>vn.edu.iuh.fit.models.OrderDetail</class>
+    <class>vn.edu.iuh.fit.models.Product</class>
+    <class>vn.edu.iuh.fit.models.ProductImage</class>
+    <class>vn.edu.iuh.fit.models.ProductPrice</class>
     <properties>
       <property name="jakarta.persistence.jdbc.driver"
                 value="org.mariadb.jdbc.Driver" />

@@ -4,13 +4,16 @@ import jakarta.persistence.*;
 import vn.edu.iuh.fit.enums.EmployeeStatus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 public class Employee {
 
     @Id
+    @Column(name = "emp_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "address", length = 250, nullable = false)
@@ -23,9 +26,11 @@ public class Employee {
     private String fullName;
     @Column(name = "phone", length = 15, nullable = false)
     private String phone;
-    @Column(name = "status",  nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private EmployeeStatus status;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     public Employee() {
     }
