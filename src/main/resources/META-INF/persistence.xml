@@ -24,11 +24,16 @@
       <property name="jakarta.persistence.jdbc.password"
                 value="0988434215az" />
 
+
+      <!-- Dialect mới nhất cho MariaDB -->
+      <property name="hibernate.dialect"
+                value="org.hibernate.dialect.MariaDBDialect" />
+
       <property name="hibernate.show_sql"
                 value="true" />
 
       <property name="hibernate.hbm2ddl.auto"
-                value="create-drop" />
+                value="update" />
     </properties>
 
   </persistence-unit>

@@ -19,7 +19,6 @@ public class Product {
     @Column(name = "name", length = 150, nullable = false)
     private String name;
     @Enumerated(EnumType.ORDINAL)
-    @Column(columnDefinition = "INT(11)")
     private ProductStatus status;
     @Column(name = "unit", length = 25, nullable = false)
     private String unit;
