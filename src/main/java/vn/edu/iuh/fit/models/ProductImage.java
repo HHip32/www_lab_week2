@@ -19,4 +19,58 @@ public class ProductImage {
 
     public ProductImage() {
     }
+
+    public ProductImage(long imageId, Product product) {
+        this.imageId = imageId;
+        this.product = product;
+    }
+
+    public ProductImage(long imageId, String alternative, String path, Product product) {
+        this.imageId = imageId;
+        this.alternative = alternative;
+        this.path = path;
+        this.product = product;
+    }
+
+    public long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(long imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getAlternative() {
+        return alternative;
+    }
+
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductImage{" +
+                "imageId=" + imageId +
+                ", alternative='" + alternative + '\'' +
+                ", path='" + path + '\'' +
+                ", product=" + product +
+                '}';
+    }
 }

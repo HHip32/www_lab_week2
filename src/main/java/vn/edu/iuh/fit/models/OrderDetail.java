@@ -23,4 +23,74 @@ public class OrderDetail {
 
     public OrderDetail() {
     }
+
+    public OrderDetail(Order order, Product product) {
+        this.order = order;
+        this.product = product;
+    }
+
+    public OrderDetail(String note, double price, double quantity) {
+        this.note = note;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public OrderDetail(String note, double price, double quantity, Order order, Product product) {
+        this.note = note;
+        this.price = price;
+        this.quantity = quantity;
+        this.order = order;
+        this.product = product;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "note='" + note + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", order=" + order +
+                ", product=" + product +
+                '}';
+    }
 }
