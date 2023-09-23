@@ -11,7 +11,7 @@ import vn.edu.iuh.fit.services.EmployeeService;
 import java.util.List;
 import java.util.Optional;
 
-//@Path("/employees")
+@Path("/employees")
 public class EmployeeResource {
 
     private final EmployeeService employeeService;
@@ -32,13 +32,13 @@ public class EmployeeResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    //    @GET
-//    @Produces("application/json")
-//    public Response getAll() {
-//        //paging if possible
-//        List<Employee> lst = employeeService.getAll();
-//        return Response.ok(lst).build();
-//    }
+        @GET
+    @Produces("application/json")
+    public Response getAll() {
+        //paging if possible
+        List<Employee> lst = employeeService.getAll();
+        return Response.ok(lst).build();
+    }
     @POST
     @Produces("application/json")
     @Consumes("application/json")

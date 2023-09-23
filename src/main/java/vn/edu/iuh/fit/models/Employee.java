@@ -10,6 +10,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
+@NamedQueries({
+        @NamedQuery(name = "Employee.getAll", query = "FROM Employee"),
+        @NamedQuery(name = "Employee.updateStatus", query = "UPDATE Employee SET status = :status WHERE id = :id")
+})
 public class Employee {
 
     @Id

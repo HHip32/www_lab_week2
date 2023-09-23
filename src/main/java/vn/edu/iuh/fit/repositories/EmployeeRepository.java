@@ -52,10 +52,10 @@ public class EmployeeRepository {
         Employee emp = query.getSingleResult();
         return emp == null ? Optional.empty() : Optional.of(emp);
     }
-//    public List<Employee> getAllEmp() {
-//        return em.createNamedQuery("Employee.findAll", Employee.class)
-//                .setParameter(1, EmployeeStatus.ACTION)
-//                .getResultList();
-//    }
+    public List<Employee> getAllEmp() {
+        return em.createNamedQuery("Employee.getAll", Employee.class)
+                .setParameter(1, EmployeeStatus.ACTION)
+                .getResultList();
+    }
 
 }

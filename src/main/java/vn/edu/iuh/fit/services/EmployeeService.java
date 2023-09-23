@@ -4,6 +4,7 @@ import vn.edu.iuh.fit.enums.EmployeeStatus;
 import vn.edu.iuh.fit.models.Employee;
 import vn.edu.iuh.fit.repositories.EmployeeRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class EmployeeService {
@@ -36,5 +37,9 @@ public class EmployeeService {
         }
         return false;
     }
+    public List<Employee> getAll() {
+        return repository.getAllEmp();
+    }
+
 
 }
