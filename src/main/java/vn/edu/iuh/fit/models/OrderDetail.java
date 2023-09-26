@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_detail")
+@NamedQueries(
+        @NamedQuery(name = "OrderDetail.getAll", query = "From OrderDetail ")
+)
 public class OrderDetail {
 
     @Column(name = "note", length = 255)

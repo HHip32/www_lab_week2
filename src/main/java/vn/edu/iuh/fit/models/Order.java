@@ -8,6 +8,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
+@NamedQueries(
+        @NamedQuery(name = "Order.getAll", query = "From Order")
+)
 public class Order {
 
     @Id

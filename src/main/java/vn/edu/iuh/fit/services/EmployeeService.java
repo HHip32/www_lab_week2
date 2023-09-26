@@ -32,7 +32,7 @@ public class EmployeeService {
         Optional<Employee> op = findById(id);
         if (op.isPresent()) {
             Employee employee = op.get();
-            employee.setStatus(EmployeeStatus.ACTION);
+            employee.setStatus(EmployeeStatus.ACTIVE);
             return true;
         }
         return false;

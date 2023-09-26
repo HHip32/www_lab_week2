@@ -7,6 +7,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries(
+        @NamedQuery(name = "Customer.getAll", query = "From Customer")
+)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

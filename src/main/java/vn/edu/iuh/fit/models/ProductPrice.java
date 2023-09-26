@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product_price")
+@NamedQueries(
+        @NamedQuery(name = "ProductPrice.getAll", query = "From ProductPrice ")
+)
 public class ProductPrice {
     @Id
     @Column(name = "price_date_time")

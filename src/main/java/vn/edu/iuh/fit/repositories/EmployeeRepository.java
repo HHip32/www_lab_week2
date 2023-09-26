@@ -16,6 +16,7 @@ public class EmployeeRepository {
     private EntityManager em;
     private EntityTransaction trans;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
     public EmployeeRepository() {
         em = Persistence
                 .createEntityManagerFactory("my-persistence")
@@ -33,9 +34,11 @@ public class EmployeeRepository {
             logger.error(ex.getMessage());
         }
     }
+
     public void setStatus(Employee employee, EmployeeStatus status) {
         employee.setStatus(status);
     }
+
     public void update(Employee employee) {
         try {
             trans.begin();
@@ -46,15 +49,17 @@ public class EmployeeRepository {
             logger.error(ex.getMessage());
         }
     }
+
     public Optional<Employee> findbyId(long id) {
         TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.id=:id", Employee.class);
         query.setParameter("id", id);
         Employee emp = query.getSingleResult();
         return emp == null ? Optional.empty() : Optional.of(emp);
     }
+
     public List<Employee> getAllEmp() {
         return em.createNamedQuery("Employee.getAll", Employee.class)
-                .setParameter(1, EmployeeStatus.ACTION)
+                .setParameter(1, EmployeeStatus.ACTIVE)
                 .getResultList();
     }
 

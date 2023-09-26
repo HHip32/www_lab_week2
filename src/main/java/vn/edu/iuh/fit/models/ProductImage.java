@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "product_image")
+@NamedQueries(
+        @NamedQuery(name = "ProductImage.getAll", query = "From ProductImage ")
+)
 public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
