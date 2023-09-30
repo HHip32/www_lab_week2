@@ -11,11 +11,9 @@ public class Test {
             transaction.begin();
 
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
         }
-        entityManager.close();
     }
 }
