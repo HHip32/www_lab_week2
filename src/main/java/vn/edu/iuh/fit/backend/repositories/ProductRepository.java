@@ -26,4 +26,15 @@ public class ProductRepository {
                 .setParameter(1, ProductStatus.ACTIVE)
                 .getResultList();
     }
+    public void insert(Product product) {
+        try {
+            trans.begin();
+            em.persist(product);
+            trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
+            logger.error(e.getMessage());
+        }
+    }
+
 }

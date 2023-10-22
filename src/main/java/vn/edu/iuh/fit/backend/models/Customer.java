@@ -38,6 +38,20 @@ public class Customer {
         this.orders = orders;
     }
 
+    public Customer(String address, String email, String phone, String name) {
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.name = name;
+    }
+    public Customer(long id,String address, String email, String phone, String name) {
+        this.id = id;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.name = name;
+    }
+
     public Customer(long id, String address, String email, String phone, String name, List<Order> orders) {
         this.id = id;
         this.address = address;
