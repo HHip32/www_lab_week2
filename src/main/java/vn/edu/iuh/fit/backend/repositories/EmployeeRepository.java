@@ -49,6 +49,22 @@ public class EmployeeRepository {
             logger.error(ex.getMessage());
         }
     }
+    public boolean delete(long id){
+        try{
+            trans.begin();
+            Optional<Employee> op = findbyId(id);
+            if (op.isPresent()) {
+                Employee employee = op.get();
+                employee.setStatus(EmployeeStatus.TERMINATED);
+                trans.commit();
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            trans.rollback();
+        }
+       return  false;
+    }
 
     public Optional<Employee> findbyId(long id) {
         TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.id=:id", Employee.class);

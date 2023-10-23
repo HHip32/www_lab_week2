@@ -51,7 +51,7 @@ public class EmployeeResource {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") long id) {
-        if (employeeService.delete(id))
+        if (employeeService.deleteEmp(id))
             return Response.ok().build();
         return Response.status(Response.Status.NOT_FOUND).build();
     }

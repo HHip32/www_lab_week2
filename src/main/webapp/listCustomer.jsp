@@ -37,8 +37,8 @@
         <td><%=customer.getPhone()%></td>
         <td><%=customer.getEmail()%></td>
         <td>
-            <a href="control?action=update&id=<%=customer.getId()%>">Update</a>
-            <a href="control?action=delete&id=<%=customer.getId()%>">Delete</a>
+            <a href="control?action=updateCustomer&id=<%=customer.getId()%>">Update</a>
+            <a href="control?action=deleteCustomer&id=<%=customer.getId()%>">Delete</a>
         </td>
     </tr>
     <%}%>

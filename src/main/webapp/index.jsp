@@ -6,5 +6,6 @@
 </head>
 <body>
 <a href="control?action=list-customer">Customer Listing</a>
+<a href="control?action=list-employee">Employee Listing</a>
 </body>
 </html>

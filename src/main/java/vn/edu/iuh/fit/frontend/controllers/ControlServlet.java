@@ -6,11 +6,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.iuh.fit.backend.enums.EmployeeStatus;
 import vn.edu.iuh.fit.backend.models.Customer;
+import vn.edu.iuh.fit.backend.models.Employee;
 import vn.edu.iuh.fit.backend.services.CustomerService;
+import vn.edu.iuh.fit.backend.services.EmployeeService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/control"}, name = "control")
@@ -19,6 +26,7 @@ public class ControlServlet extends HttpServlet {
     }
 
     CustomerService customerService = new CustomerService();
+    EmployeeService employeeService = new EmployeeService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +39,7 @@ public class ControlServlet extends HttpServlet {
                     case "list-customer":
                         resp.sendRedirect("listCustomer.jsp");
                         break;
-                    case "update":
+                    case "updateCustomer":
                         long custID = Long.parseLong(req.getParameter("id"));
                         Optional<Customer> customer = customerService.findCustomer(custID);
                         if (customer.isPresent()) {
@@ -41,8 +49,24 @@ public class ControlServlet extends HttpServlet {
                             resp.sendRedirect("updateCustomer.jsp");
                         }
                         break;
-                    case "delete":
-                        deletCustomer(req,resp);
+                    case "deleteCustomer":
+                        deletCustomer(req, resp);
+                        break;
+                    case "list-employee":
+                        resp.sendRedirect("listEmployee.jsp");
+                        break;
+                    case "updateEmployee":
+                        long empId = Long.parseLong(req.getParameter("id"));
+                        Optional<Employee> employee = employeeService.findById(empId);
+                        if (employee.isPresent()) {
+                            Employee actualEmployee = employee.get();
+                            session.setAttribute("updateEmployee", actualEmployee);
+                            session.setAttribute("idEmpUpdate", empId);
+                            resp.sendRedirect("updateEmployee.jsp");
+                        }
+                        break;
+                    case "deleteEmployee":
+                        deleteEmployee(req,resp);
                         break;
                 }
             }
@@ -62,7 +86,13 @@ public class ControlServlet extends HttpServlet {
                         insertCustomer(req, resp);
                         break;
                     case "updateCustomer":
-                        updateCustomer(req,resp);
+                        updateCustomer(req, resp);
+                        break;
+                    case "insertEmployee":
+                        insertEmployee(req, resp);
+                        break;
+                    case "updateEmployee":
+                        updateEmployee(req, resp);
                         break;
                 }
             }
@@ -76,27 +106,69 @@ public class ControlServlet extends HttpServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        Customer customer = new Customer(address, email, phone, name );
+        Customer customer = new Customer(address, email, phone, name);
         customerService.insertCustomer(customer);
         resp.sendRedirect("listCustomer.jsp");
     }
-    public void updateCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+    public void updateCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         long id = (long) session.getAttribute("idUpdate");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        Customer customer = new Customer(id,address, email, phone, name );
+        Customer customer = new Customer(id, address, email, phone, name);
         customerService.updateCustomer(customer);
         resp.sendRedirect("listCustomer.jsp");
     }
-    public void deletCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+    public void deletCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id = Long.parseLong(req.getParameter("id"));
-        if(customerService.deleteCustomer(id)){
+        if (customerService.deleteCustomer(id)) {
             resp.sendRedirect("listCustomer.jsp");
-        }else {
+        } else {
             System.out.println("Xóa thất bại!");
+        }
+    }
+
+    public void insertEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
+        String s_dob = req.getParameter("dob");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dob = LocalDate.parse(s_dob, dateTimeFormatter);
+        Employee employee = new Employee(address, dob, email, name, phone, EmployeeStatus.ACTIVE);
+        employeeService.insertEmp(employee);
+        resp.sendRedirect("listEmployee.jsp");
+
+    }
+
+    public void updateEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        long id = (long) session.getAttribute("idEmpUpdate");
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
+        String s_dob = req.getParameter("dob");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dob = LocalDate.parse(s_dob, dateTimeFormatter);
+        Employee employee = new Employee(id, address, dob, email, name, phone, EmployeeStatus.ACTIVE);
+        employeeService.updateEmp(employee);
+        resp.sendRedirect("listEmployee.jsp");
+    }
+
+    public void deleteEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        long empID = Long.parseLong(req.getParameter("id"));
+        System.out.println(empID);
+        if (employeeService.deleteEmp(empID)) {
+            System.out.println("Xoa thanh cong");
+            resp.sendRedirect("listEmployee.jsp");
+        } else {
+            System.out.println("Xoa that bai!");
         }
     }
 }

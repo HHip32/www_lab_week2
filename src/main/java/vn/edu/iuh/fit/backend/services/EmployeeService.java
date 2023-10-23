@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public class EmployeeService {
     private EmployeeRepository repository;
+
     public EmployeeService() {
         repository = new EmployeeRepository();
     }
@@ -16,18 +17,19 @@ public class EmployeeService {
     public void insertEmp(Employee employee) {
         repository.insertEmp(employee);
     }
+
+    public void updateEmp(Employee employee) {
+        repository.update(employee);
+    }
+
     public Optional<Employee> findById(long id) {
         return repository.findbyId(id);
     }
-    public boolean delete(long id) {
-        Optional<Employee> op = findById(id);
-        if (op.isPresent()) {
-            Employee employee = op.get();
-            employee.setStatus(EmployeeStatus.TERMINATED);
-            return true;
-        }
-        return false;
+
+    public boolean deleteEmp(long id) {
+        return repository.delete(id);
     }
+
     public boolean activeEmp(long id) {
         Optional<Employee> op = findById(id);
         if (op.isPresent()) {
@@ -37,6 +39,7 @@ public class EmployeeService {
         }
         return false;
     }
+
     public List<Employee> getAll() {
         return repository.getAllEmp();
     }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import vn.edu.iuh.fit.backend.converters.ConvertEmployeeStatus;
 import vn.edu.iuh.fit.backend.enums.EmployeeStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class Employee {
     private String address;
     @Column(name = "dob", nullable = false)
     @JsonbDateFormat(value = "yyyy-MM-dd")
-    private LocalDateTime dob;
+    private LocalDate dob;
     @Column(name = "email", length = 150)
     private String email;
     @Column(name = "full_name", length = 150, nullable = false)
@@ -41,7 +42,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String address, LocalDateTime dob, String email, String fullName, String phone, EmployeeStatus status) {
+    public Employee(String address, LocalDate dob, String email, String fullName, String phone, EmployeeStatus status) {
         this.address = address;
         this.dob = dob;
         this.email = email;
@@ -50,7 +51,7 @@ public class Employee {
         this.status = status;
     }
 
-    public Employee(long id, String address, LocalDateTime dob, String email, String fullName, String phone, EmployeeStatus status) {
+    public Employee(long id, String address, LocalDate dob, String email, String fullName, String phone, EmployeeStatus status) {
         this.id = id;
         this.address = address;
         this.dob = dob;
@@ -76,11 +77,11 @@ public class Employee {
         this.address = address;
     }
 
-    public LocalDateTime getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(LocalDateTime dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
